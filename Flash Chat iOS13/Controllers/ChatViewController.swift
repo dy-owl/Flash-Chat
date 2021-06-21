@@ -68,6 +68,10 @@ class ChatViewController: UIViewController {
         }
     }
     
+    func clearMessageTextField() {
+        messageTextfield.text = ""
+    }
+    
     @IBAction func sendPressed(_ sender: UIButton) {
         if let messageSender = Auth.auth().currentUser?.email, let messageBody = messageTextfield.text {
             db.collection(K.FStore.collectionName).addDocument(data: [
@@ -82,6 +86,8 @@ class ChatViewController: UIViewController {
                 }
             }
         }
+        
+        clearMessageTextField()
     }
     
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
