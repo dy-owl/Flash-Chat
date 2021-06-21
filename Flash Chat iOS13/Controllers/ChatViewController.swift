@@ -69,7 +69,9 @@ class ChatViewController: UIViewController {
     }
     
     func clearMessageTextField() {
-        messageTextfield.text = ""
+        DispatchQueue.main.async {
+            self.messageTextfield.text = ""
+        }
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
@@ -83,11 +85,10 @@ class ChatViewController: UIViewController {
                     print("There was an issue saving data to Firestore: \(err)")
                 } else {
                     print("Successfully saved data.")
+                    self.clearMessageTextField()
                 }
             }
         }
-        
-        clearMessageTextField()
     }
     
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
